@@ -31,12 +31,15 @@ const Products = () => {
   };
 
   const handleDelete = async (productId) => {
-    try {
-      await deleteProduct(productId); // Call the service function to delete product
-      setProducts(prevProducts => prevProducts.filter(product => product.productId !== productId));
-      console.log('Product deleted successfully:', productId);
-    } catch (error) {
-      console.error('Error deleting product:', error);
+    const confirmDelete = window.confirm('Are you sure you want to delete the product?');
+    if(confirmDelete){
+      try {
+        await deleteProduct(productId); // Call the service function to delete product
+        setProducts(prevProducts => prevProducts.filter(product => product.productId !== productId));
+        console.log('Product deleted successfully:', productId);
+      } catch (error) {
+        console.error('Error deleting product:', error);
+      }
     }
   };
 

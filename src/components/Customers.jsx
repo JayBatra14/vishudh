@@ -23,12 +23,15 @@ const Customers = () => {
   };
 
   const handleDelete = async (customerId) => {
-    try {
-      await deleteCustomer(customerId); // Call the service function to delete customer
-      setCustomers(prevCustomers => prevCustomers.filter(customer => customer.customerId !== customerId));
-      console.log('Customer deleted successfully:', customerId);
-    } catch (error) {
-      console.error('Error deleting customer:', error);
+    const confirmDelete = window.confirm('Are you sure you want to delete the customer?');
+    if(confirmDelete){
+      try {
+        await deleteCustomer(customerId); // Call the service function to delete customer
+        setCustomers(prevCustomers => prevCustomers.filter(customer => customer.customerId !== customerId));
+        console.log('Customer deleted successfully:', customerId);
+      } catch (error) {
+        console.error('Error deleting customer:', error);
+      }
     }
   };
 
